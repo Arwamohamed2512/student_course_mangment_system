@@ -4,11 +4,13 @@ const enrollmentschema = new mongoose.Schema({
 
     userId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref:"Users",
         required: [true, "userId is required"]
     },
 
     courseId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref:"Courses",
         required: [true, "courseId is required"]
     },
 
