@@ -2,16 +2,13 @@ const Course = require("../models/course.model")
 
 
 // createCourse
-// بيعمل إنشاء Course جديد وحفظه في MongoDB
 exports.createCourse = async (req, res, next) => {
     try {
 
         // البيانات دي بتيجي من req.body
-        // يعني لازم تتبعت من Postman أو Frontend في body
         const { title, description, instructor, duration, price, capacity } = req.body
 
         // بنعمل object جديد من Course Model
-        // Course جاي من ../models/course.model
         const course = new Course({
             title,
             description,
@@ -21,7 +18,6 @@ exports.createCourse = async (req, res, next) => {
             capacity
         })
 
-        // حفظ الـ course في MongoDB
         // الـ validation اللي موجود في course.model بيشتغل هنا
         await course.save()
 
@@ -59,17 +55,14 @@ exports.getCourses = async (req, res, next) => {
 
 
 // getCourseById
-// بيجيب Course واحد باستخدام الـ id
 exports.getCourseById = async (req, res, next) => {
     try {
 
         // الـ id جاي من URL
         const { id } = req.params
 
-        // البحث عن Course باستخدام الـ id
         const course = await Course.findById(id)
 
-        // لو مفيش Course بالـ id ده
         if (!course) {
             return res.status(404).json({
                 msg: "course not found"
@@ -86,10 +79,7 @@ exports.getCourseById = async (req, res, next) => {
         next(err)
     }
 }
-
-
 // updateCourse
-// بيعمل Update للـ Course باستخدام الـ id
 exports.updateCourse = async (req, res, next) => {
     try {
 
@@ -137,8 +127,6 @@ exports.updateCourse = async (req, res, next) => {
         next(err)
     }
 }
-
-
 // deleteCourse
 // بيحذف Course باستخدام الـ id
 exports.deleteCourse = async (req, res, next) => {
@@ -147,7 +135,6 @@ exports.deleteCourse = async (req, res, next) => {
         // الـ id جاي من URL
         const { id } = req.params
 
-        // البحث عن الـ Course وحذفه
         const course = await Course.findByIdAndDelete(id)
 
         // لو الـ Course مش موجود
