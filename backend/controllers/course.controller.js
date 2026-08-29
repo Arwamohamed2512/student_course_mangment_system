@@ -23,14 +23,50 @@ exports.createCourse = async (req, res, next) => {
 // Get All Courses
 exports.getCourses = async (req, res, next) => {
     try {
-        const courses = await Course.find()
-        res.status(200).json({
-            courses: courses
-        })
+        // const courses = await Course.find()
+        // res.status(200).json({
+        //     courses: courses
+        // })
+
+
+        // url should be get/courses?search="name of the course" ex coures?search=math  or get/courses -->will return all cources
+        const { search } = req.query
+        const filter = search
+            ? { title: { $regex: search, $options: "i" } }
+            : {}
+        const courses = await Course.find(filter)
+        res.status(200).json({ courses: courses })
+
+
     } catch (err) {
         next(err)
     }
 }
+
+// get cource by title  url -->/courses/search?title=math
+// exports.getCoursesByTitle = async (req, res, next) => {
+//     try {
+//         const { title } = req.query
+
+//         if (!title) {
+//             return res.status(400).json({
+//                 msg: "title query is required"
+//             })
+//         }
+
+//         const courses = await Course.find({
+//             title: { $regex: title, $options: "i" }
+//         })
+
+//         res.status(200).json({
+//             courses: courses
+//         })
+
+//     } catch (err) {
+//         next(err)
+//     }
+// }
+
 // Get Course By ID
 exports.getCourseById = async (req, res, next) => {
     try {
