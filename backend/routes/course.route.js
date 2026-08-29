@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const courseController = require("../controllers/course.controller")
 const vaildtoken = require("../middlewares/auth.middleware")
-
+const admin = require("../middlewares/admin.middleware")
 router.use(vaildtoken)
 
 router.post("/",adminmiddleware,courseController.createCourse)
