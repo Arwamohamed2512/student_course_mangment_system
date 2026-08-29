@@ -9,9 +9,9 @@ exports.getProfile = async (req, res, next) => {
     }
     res.json({ success: true, user });
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 //  update ser profile  and (PUT /users/:id)
 exports.updateProfile = async (req, res, next) => {
@@ -28,8 +28,8 @@ exports.updateProfile = async (req, res, next) => {
       { new: true,  } //returning the new updated data
     ).select('-password');
 
-    res.json({ success: true, user: updatedUser });
+    res.json({ success: true, user: updatedUser })
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}

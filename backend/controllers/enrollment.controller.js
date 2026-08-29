@@ -21,11 +21,11 @@ exports.enroll = async (req, res, next) => {
         }
 
         const enrollment = await Enrollment.create({ userId, courseId, status: "active" });
-        return res.status(201).json({ success: true, enrollment });
+        return res.status(201).json({ success: true, enrollment })
     } catch (error) {
-        next(error);
+        next(error)
     }
-};
+}
 
 exports.getMyEnrollments = async (req, res, next) => {
     try {
@@ -37,9 +37,9 @@ exports.getMyEnrollments = async (req, res, next) => {
             success: true,
             count: enrollments.length,
             enrollments
-        });
+        })
     } catch (error) {
-        next(error);
+        next(error)
     }
 };
 
@@ -55,18 +55,18 @@ exports.cancelEnrollment = async (req, res, next) => {
             return res.status(403).json({
                 success: false,
                 message: "Not authorized to cancel this enrollment"
-            });
+            })
         }
 
-        enrollment.status = "cancelled";
-        await enrollment.save();
+        enrollment.status = "cancelled"
+        await enrollment.save()
 
         return res.status(200).json({
             success: true,
             message: "Enrollment cancelled",
             enrollment
-        });
+        })
     } catch (error) {
-        next(error);
+        next(error)
     }
-};
+}
