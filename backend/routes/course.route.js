@@ -1,14 +1,18 @@
-const express = require("express")
-const router = express.Router()
-const courseController = require("../controllers/course.controller")
-const vaildtoken = require("../middlewares/auth.middleware")
-const admin = require("../middlewares/admin.middleware")
-router.use(vaildtoken)
+const express = require("express");
+const router = express.Router();
+const courseController = require("../controllers/course.controller");
+const authMiddleware = require("../middleware/auth.middleware");
+const adminMiddleware = require("../middleware/admin.middleware");
 
-router.post("/",adminmiddleware,courseController.createCourse)
-router.get("/getall", courseController.getCourses)
-router.get("/getbyid/:id", courseController.getCourseById)
-router.delete("/:id",adminmiddleware,courseController.deleteCourse)
-router.put("/:id",adminmiddleware,courseController.updateCourse)
+router.use(authMiddleware);
 
-module.exports = router
+router.post("/", adminMiddleware, courseController.createCourse);
+router.get("/", courseController.getCourses);
+router.get("/getall", courseController.getCourses);
+router.get("/search", courseController.getCoursesByTitle);
+router.get("/getbyid/:id", courseController.getCourseById);
+router.get("/:id", courseController.getCourseById);
+router.delete("/:id", adminMiddleware, courseController.deleteCourse);
+router.put("/:id", adminMiddleware, courseController.updateCourse);
+
+module.exports = router;

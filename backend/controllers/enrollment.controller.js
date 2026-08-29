@@ -1,60 +1,72 @@
-const Enrollment = require('../models/enrollment.model');
-const course= require('../models/course.model')
+const Enrollment = require("../models/enrollment.model");
+const Course = require("../models/course.model");
 
-
-//  adds enrolemnt method -> post, path -> /enrollmets
 exports.enroll = async (req, res, next) => {
-  try {
-    const courseId = req.body.courseId;
-    const userId = req.user.id; 
+    try {
+        const { courseId } = req.body;
+        const userId = req.user.id;
 
-    // checks if the course exists or not 
-    const findcourse = await course.findById(courseId)
-    if (!findcourse)return res.status(404).json({msg:"course not found "})
+        if (!courseId) {
+            return res.status(400).json({ success: false, message: "courseId is required" });
+        }
 
-    // checks if user in enrolled or not 
+        const foundCourse = await Course.findById(courseId);
+        if (!foundCourse) {
+            return res.status(404).json({ success: false, message: "Course not found" });
+        }
 
-    const existing = await Enrollment.findOne({ userId, courseId });
-    if (existing) {
-      return res.status(400).json({ success: false, message: 'Already enrolled in this course' });
+        const existing = await Enrollment.findOne({ userId, courseId, status: "active" });
+        if (existing) {
+            return res.status(409).json({ success: false, message: "Already enrolled in this course" });
+        }
+
+        const enrollment = await Enrollment.create({ userId, courseId, status: "active" });
+        return res.status(201).json({ success: true, enrollment });
+    } catch (error) {
+        next(error);
     }
-
-    const enrollment = await Enrollment({ userId, courseId });
-    await enrollment.save()
-    res.status(201).json({ success: true, enrollment });
-  } catch (err) {
-    next(err);
-  }
 };
 
+exports.getMyEnrollments = async (req, res, next) => {
+    try {
+        const enrollments = await Enrollment.find({ userId: req.user.id })
+            .populate("courseId")
+            .sort({ enrolledAt: -1 });
 
-// gets all the user enrolment method ->get -> path / getall
-exports.getMyEnrollments = async (req, res,next) => {  
-  try {
-    const enrollments = await Enrollment.find({ user: req.user.id }).populate('course');
-    res.status(200).json({ success: true, count: enrollments.length, enrollments });
-  } catch (err) {
-    next(err);
-  }
+        return res.status(200).json({
+            success: true,
+            count: enrollments.length,
+            enrollments
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
+exports.cancelEnrollment = async (req, res, next) => {
+    try {
+        const enrollment = await Enrollment.findById(req.params.id);
 
-// cancels  enrolment  method -> delet  path ->:id
-exports.cancelEnrollment = async (req, res,next) => {
-  try {
-    const enrollment = await Enrollment.findById(req.params.id);
-    if (!enrollment) {
-      return res.status(404).json({ success: false, message: 'Enrollment not found' });
+        if (!enrollment) {
+            return res.status(404).json({ success: false, message: "Enrollment not found" });
+        }
+
+        if (enrollment.userId.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Not authorized to cancel this enrollment"
+            });
+        }
+
+        enrollment.status = "cancelled";
+        await enrollment.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Enrollment cancelled",
+            enrollment
+        });
+    } catch (error) {
+        next(error);
     }
-
-    // makes sure that the same  how enroller is the smae who wants to delet it by the user id 
-    if (enrollment.user.toString() !== req.user.id) {
-      return res.status(403).json({ success: false, message: 'Not authorized to cancel this enrollment' });
-    }
-
-    await enrollment.deleteOne();
-    res.json({ success: true, message: 'Enrollment cancelled' });
-  } catch (err) {
-    next(err);
-  }
 };
