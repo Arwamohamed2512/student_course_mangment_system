@@ -83,5 +83,87 @@ exports.getCourseById = async (req, res, next) => {
     } catch (err) {
 
         // إرسال الخطأ للـ global error middleware
+        next(err)
+    }
+}
+
+
+// updateCourse   admin only 
+// بيعمل Update للـ Course باستخدام الـ id
+exports.updateCourse = async (req, res, next) => {
+    try {
+
+        // الـ id جاي من URL
+        const { id } = req.params
+
+        // البيانات الجديدة جاية من req.body
+        const { title, description, instructor, duration, price, capacity } = req.body
+
+        // البحث عن الـ Course بالـ id وتحديث البيانات
+        const course = await Course.findByIdAndUpdate(
+            id,
+            {
+                title,
+                description,
+                instructor,
+                duration,
+                price,
+                capacity
+            },
+            {
+                // يرجع الـ Course بعد التحديث
+                new: true,
+
+                // يشغل validation الموجودة في الـ Schema أثناء الـ update
+                runValidators: true
+            }
+        )
+
+        // لو الـ Course مش موجود
+        if (!course) {
+            return res.status(404).json({
+                msg: "course not found"
+            })
+        }
+
+        res.status(200).json({
+            msg: "course updated successfully",
+            course: course
+        })
+
+    } catch (err) {
+
+        // إرسال الخطأ للـ global error middleware
+        next(err)
+    }
+}
+
+
+// deleteCourse  only admin
+// بيحذف Course باستخدام الـ id
+exports.deleteCourse = async (req, res, next) => {
+    try {
+
+        // الـ id جاي من URL
+        const { id } = req.params
+
+        // البحث عن الـ Course وحذفه
+        const course = await Course.findByIdAndDelete(id)
+
+        // لو الـ Course مش موجود
+        if (!course) {
+            return res.status(404).json({
+                msg: "course not found"
+            })
+        }
+
+        res.status(200).json({
+            msg: "course deleted successfully"
+        })
+
+    } catch (err) {
+
+        // إرسال الخطأ للـ global error middleware
+        next(err)
     }
 }
