@@ -22,7 +22,7 @@ exports.enroll = async (req, res, next) => {
 
 <<<<<<< HEAD
         const enrollment = await Enrollment.create({ userId, courseId, status: "active" });
-=======
+=======                         
         const enrollment = await Enrollment.create({ userId, courseId, status: "active" })
 >>>>>>> eb2ec79be83bc972395df6651f3816b347bb768e
         return res.status(201).json({ success: true, enrollment })
