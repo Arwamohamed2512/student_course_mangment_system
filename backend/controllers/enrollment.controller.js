@@ -20,11 +20,9 @@ exports.enroll = async (req, res, next) => {
             return res.status(409).json({ success: false, message: "Already enrolled in this course" })
         }
 
-<<<<<<< HEAD
-        const enrollment = await Enrollment.create({ userId, courseId, status: "active" });
-=======                         
+                      
         const enrollment = await Enrollment.create({ userId, courseId, status: "active" })
->>>>>>> eb2ec79be83bc972395df6651f3816b347bb768e
+
         return res.status(201).json({ success: true, enrollment })
     } catch (error) {
         next(error)
@@ -62,9 +60,7 @@ exports.cancelEnrollment = async (req, res, next) => {
             })
         }
 
-        enrollment.status = "cancelled"
-        await enrollment.save()
-
+        await enrollment.deleteOne()
         return res.status(200).json({
             success: true,
             message: "Enrollment cancelled",
