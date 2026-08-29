@@ -27,10 +27,37 @@ exports.getCourses = async (req, res, next) => {
         res.status(200).json({
             courses: courses
         })
+
+
     } catch (err) {
         next(err)
     }
 }
+
+// get cource by title  
+exports.getCoursesByTitle = async (req, res, next) => {
+    try {
+        const { title } = req.query
+
+        if (!title) {
+            return res.status(400).json({
+                msg: "title query is required"
+            })
+        }
+
+        const courses = await Course.find({
+            title: { $regex: title, $options: "i" }
+        })
+
+        res.status(200).json({
+            courses: courses
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
 // Get Course By ID
 exports.getCourseById = async (req, res, next) => {
     try {

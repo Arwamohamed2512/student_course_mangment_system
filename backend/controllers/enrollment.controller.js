@@ -20,7 +20,11 @@ exports.enroll = async (req, res, next) => {
             return res.status(409).json({ success: false, message: "Already enrolled in this course" })
         }
 
+<<<<<<< HEAD
+        const enrollment = await Enrollment.create({ userId, courseId, status: "active" });
+=======
         const enrollment = await Enrollment.create({ userId, courseId, status: "active" })
+>>>>>>> eb2ec79be83bc972395df6651f3816b347bb768e
         return res.status(201).json({ success: true, enrollment })
     } catch (error) {
         next(error)
@@ -37,7 +41,7 @@ exports.getMyEnrollments = async (req, res, next) => {
             success: true,
             count: enrollments.length,
             enrollments
-        });
+        })
     } catch (error) {
         next(error)
     }
