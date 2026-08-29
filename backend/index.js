@@ -26,10 +26,10 @@ app.get("/", (req, res) => {
     res.json({ success: true, message: "Student Course Management API is running" })
 })
 
-app.use("/api/auth", authRoutes)
-app.use("/api/users", userRoutes)
-app.use("/api/courses", courseRoutes)
-app.use("/api/enrollments", enrollmentRoutes)
+app.use("/auth", authRoutes)
+app.use("/users", userRoutes)
+app.use("/courses", courseRoutes)
+app.use("/enrollments", enrollmentRoutes)
 
 app.use((req, res) => {
     res.status(404).json({ success: false, message: "Route not found" })
@@ -51,7 +51,7 @@ const startServer = async () => {
         console.error("Failed to start server:", error.message)
         process.exit(1)
     }
-};
+}
 
 startServer()
 

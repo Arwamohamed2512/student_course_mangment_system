@@ -23,11 +23,11 @@ const publicUser = (user) => ({
     role: user.role,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt
-});
+})
 
 exports.register = async (req, res, next) => {
     try {
-        const { firstName, lastName, email, password, age } = req.body || {}
+        const { firstName, lastName, email, password, age, role } = req.body || {}
 
         if (!firstName || !lastName || !email || !password) {
             return res.status(400).json({
@@ -52,7 +52,8 @@ exports.register = async (req, res, next) => {
             lastName: lastName.trim(),
             email: normalizedEmail,
             password: hashedPassword,
-            age
+            age,
+            role
         })
 
         const token = createToken(user)
@@ -104,4 +105,3 @@ exports.login = async (req, res, next) => {
 
 module.exports.createToken = createToken
 module.exports.publicUser = publicUser
-
