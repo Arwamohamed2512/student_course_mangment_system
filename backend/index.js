@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: path.join(__dirname, "..", "config.env") });
+dotenv.config({ path: path.join(__dirname, "config.env") });
 
 const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
