@@ -1,58 +1,58 @@
-const path = require("path");
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const path = require("path")
+const express = require("express")
+const mongoose = require("mongoose")
+const dotenv = require("dotenv")
 
-dotenv.config({ path: path.join(__dirname, "config.env") });
+dotenv.config({ path: path.join(__dirname, "config.env") })
 
-const authRoutes = require("./routes/auth.route");
-const userRoutes = require("./routes/user.route");
-const courseRoutes = require("./routes/course.route");
-const enrollmentRoutes = require("./routes/enrollment.route");
-const errorMiddleware = require("./middleware/err.middelware");
+const authRoutes = require("./routes/auth.route")
+const userRoutes = require("./routes/user.route")
+const courseRoutes = require("./routes/course.route")
+const enrollmentRoutes = require("./routes/enrollment.route")
+const errorMiddleware = require("./middleware/err.middelware")
 
-const app = express();
-const PORT = Number(process.env.PORT || process.env.port || 3000);
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || process.env.mongourl;
-const JWT_SECRET = process.env.JWT_SECRET || process.env.secret_key;
+const app = express()
+const PORT = Number(process.env.PORT || process.env.port || 3000)
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || process.env.mongourl
+const JWT_SECRET = process.env.JWT_SECRET || process.env.secret_key
 
 if (JWT_SECRET) {
-    process.env.JWT_SECRET = JWT_SECRET;
+    process.env.JWT_SECRET = JWT_SECRET
 }
 
-app.use(express.json());
+app.use(express.json())
 
 app.get("/", (req, res) => {
-    res.json({ success: true, message: "Student Course Management API is running" });
-});
+    res.json({ success: true, message: "Student Course Management API is running" })
+})
 
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/courses", courseRoutes);
-app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/auth", authRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/courses", courseRoutes)
+app.use("/api/enrollments", enrollmentRoutes)
 
 app.use((req, res) => {
-    res.status(404).json({ success: false, message: "Route not found" });
+    res.status(404).json({ success: false, message: "Route not found" })
 });
 
-app.use(errorMiddleware);
+app.use(errorMiddleware)
 
 const startServer = async () => {
     try {
         if (!MONGO_URI) {
-            throw new Error("MongoDB connection string is not configured in config.env");
+            throw new Error("MongoDB connection string is not configured in config.env")
         }
 
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(MONGO_URI)
         app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
+            console.log(`Server running on port ${PORT}`)
         });
     } catch (error) {
-        console.error("Failed to start server:", error.message);
-        process.exit(1);
+        console.error("Failed to start server:", error.message)
+        process.exit(1)
     }
 };
 
-startServer();
+startServer()
 
-module.exports = app;
+module.exports = app
