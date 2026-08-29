@@ -33,7 +33,9 @@ app.use("/api/enrollments", enrollmentRoutes)
 
 app.use((req, res) => {
     res.status(404).json({ success: false, message: "Route not found" })
+
 })
+
 
 app.use(errorMiddleware)
 
@@ -46,7 +48,9 @@ const startServer = async () => {
         await mongoose.connect(MONGO_URI)
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`)
+
         })
+
     } catch (error) {
         console.error("Failed to start server:", error.message)
         process.exit(1)
