@@ -1,7 +1,7 @@
 const Course = require("../models/course.model")
 
 
-// createCourse
+// createCourse  admin only
 // بيعمل إنشاء Course جديد وحفظه في MongoDB
 exports.createCourse = async (req, res, next) => {
     try {
@@ -38,7 +38,7 @@ exports.createCourse = async (req, res, next) => {
 }
 
 
-// getCourses
+// getCourses   public 
 // بيجيب كل الـ Courses الموجودة في Database
 exports.getCourses = async (req, res, next) => {
     try {
@@ -58,7 +58,7 @@ exports.getCourses = async (req, res, next) => {
 }
 
 
-// getCourseById
+// getCourseById   public 
 // بيجيب Course واحد باستخدام الـ id
 exports.getCourseById = async (req, res, next) => {
     try {
@@ -88,7 +88,7 @@ exports.getCourseById = async (req, res, next) => {
 }
 
 
-// updateCourse
+// updateCourse   admin only 
 // بيعمل Update للـ Course باستخدام الـ id
 exports.updateCourse = async (req, res, next) => {
     try {
@@ -139,7 +139,7 @@ exports.updateCourse = async (req, res, next) => {
 }
 
 
-// deleteCourse
+// deleteCourse  only admin
 // بيحذف Course باستخدام الـ id
 exports.deleteCourse = async (req, res, next) => {
     try {

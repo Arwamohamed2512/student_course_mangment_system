@@ -31,7 +31,7 @@ exports.enroll = async (req, res, next) => {
 // gets all the user enrolment method ->get -> path / getall
 exports.getMyEnrollments = async (req, res,next) => {  
   try {
-    const enrollments = await Enrollment.find({ userId: req.user.id }).populate('course');
+    const enrollments = await Enrollment.find({ user: req.user.id }).populate('course');
     res.status(200).json({ success: true, count: enrollments.length, enrollments });
   } catch (err) {
     next(err);
