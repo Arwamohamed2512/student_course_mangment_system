@@ -63,11 +63,11 @@ exports.register = async (req, res, next) => {
             message: "Registration successful",
             token,
             user: publicUser(user)
-        });
+        })
     } catch (error) {
         next(error)
     }
-};
+}
 
 exports.login = async (req, res, next) => {
     try {
