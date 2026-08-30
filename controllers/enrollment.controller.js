@@ -30,7 +30,7 @@ exports.enroll = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-};
+}
 
 exports.getMyEnrollments = async (req, res, next) => {
     try {
@@ -53,7 +53,7 @@ exports.getMyEnrollments = async (req, res, next) => {
             success: true,
             count: enrollments.length,
             enrollments
-        });
+        })
     } catch (error) {
         next(error)
     }
