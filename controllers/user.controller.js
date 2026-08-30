@@ -15,7 +15,7 @@ exports.getProfile = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
 // Update user profile (Secured)
 exports.updateProfile = async (req, res, next) => {
@@ -48,4 +48,4 @@ exports.updateProfile = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
