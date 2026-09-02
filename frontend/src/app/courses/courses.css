@@ -1,0 +1,161 @@
+/* Navbar Styling (Black & White) */
+.figma-nav {
+  background-color: #000000;
+  border-radius: 0 0 16px 16px;
+}
+
+.nav-btn {
+  color: #888888 !important;
+  font-size: 0.9rem;
+  padding: 6px 16px !important;
+  border-radius: 20px;
+}
+
+.nav-btn.active {
+  background-color: #222222;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Titles */
+.figma-title {
+  font-family: Georgia, serif;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Search Input */
+.figma-search {
+  background-color: #f4f4f5 !important;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #000000 !important;
+}
+
+.figma-search:focus {
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Cards Layout */
+.figma-card {
+  background-color: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: 16px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.figma-card:hover {
+  border-color: #000000 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.course-heading {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.category-badge {
+  background-color: #f4f4f5 !important;
+  color: #000000 !important;
+  border: 1px solid #e4e4e7;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.price-text {
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+/* Progress Bar */
+.figma-progress {
+  height: 6px !important;
+  background-color: #f4f4f5 !important;
+  border-radius: 10px;
+}
+
+.bg-primary-custom {
+  background-color: #000000 !important;
+}
+
+.bg-danger-custom {
+  background-color: #71717a !important;
+}
+
+/* Buttons */
+.btn-enrolled {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 10px;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.btn-enrolled:hover {
+  background-color: #27272a !important;
+}
+
+.btn-full {
+  background-color: #f4f4f5 !important;
+  color: #a1a1aa !important;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #e4e4e7;
+}
+
+/* Modal Styling */
+.figma-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.figma-modal {
+  background-color: #ffffff !important;
+  border: 1px solid #000000 !important;
+  border-radius: 20px !important;
+}
+
+.info-box {
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+}
+
+.btn-action-primary {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-action-primary:hover {
+  background-color: #27272a;
+}
