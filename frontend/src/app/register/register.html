@@ -1,0 +1,68 @@
+<div class="register-container">
+  <h1>Create an Account</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+      <div class="error" *ngIf="f['firstName'].touched && f['firstName'].invalid">
+        <span *ngIf="f['firstName'].errors?.['required']">First name is required.</span>
+        <span *ngIf="f['firstName'].errors?.['minlength']">First name must be at least 3 characters.</span>
+        <span *ngIf="f['firstName'].errors?.['maxlength']">First name must be less than 50 characters.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+      <div class="error" *ngIf="f['lastName'].touched && f['lastName'].invalid">
+        <span *ngIf="f['lastName'].errors?.['required']">Last name is required.</span>
+        <span *ngIf="f['lastName'].errors?.['minlength']">Last name must be at least 3 characters.</span>
+        <span *ngIf="f['lastName'].errors?.['maxlength']">Last name must be less than 50 characters.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      <div class="error" *ngIf="f['email'].touched && f['email'].invalid">
+        <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+        <span *ngIf="f['email'].errors?.['pattern']">Please enter a valid email address.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input id="age" type="number" formControlName="age" />
+      <div class="error" *ngIf="f['age'].touched && f['age'].invalid">
+        <span *ngIf="f['age'].errors?.['min']">Age must be at least 16.</span>
+        <span *ngIf="f['age'].errors?.['max']">Age must be less than 100.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" />
+      <div class="error" *ngIf="f['password'].touched && f['password'].invalid">
+        <span *ngIf="f['password'].errors?.['required']">Password is required.</span>
+        <span *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+      <div class="error" *ngIf="f['confirmPassword'].touched && (f['confirmPassword'].invalid || registerForm.errors?.['passwordMismatch'])">
+        <span *ngIf="f['confirmPassword'].errors?.['required']">Please confirm your password.</span>
+        <span *ngIf="registerForm.errors?.['passwordMismatch']">Passwords do not match.</span>
+      </div>
+    </div>
+
+    <div class="error server-error" *ngIf="serverError">{{ serverError }}</div>
+    <button type="submit" [disabled]="submitting">
+      {{ submitting ? 'Creating account...' : 'Register' }}
+    </button>
+  </form>
+
+  <p class="login-link">Already have an account? <a routerLink="/login">Log in</a></p>
+</div>

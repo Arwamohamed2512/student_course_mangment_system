@@ -1,0 +1,59 @@
+.register-container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.server-error {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+}

@@ -1,26 +1,29 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Courses } from './courses/courses';
 import { Navbar } from './components/navbar/navbar';
 import { Profile } from './pages/profile/profile';
+import { RegisterComponent } from './register/register';
 
 @NgModule({
   declarations: [
     App,
     Courses,
     Navbar,
-    Profile
+    Profile,
+    RegisterComponent
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   providers: [
