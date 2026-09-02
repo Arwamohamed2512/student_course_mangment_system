@@ -1,0 +1,288 @@
+<div class="profile-page">
+
+  <div class="profile-header">
+    <div>
+      <h1>My Profile</h1>
+      <p>Manage your personal information and account details.</p>
+    </div>
+
+    <button
+      class="edit-btn"
+      *ngIf="!isEditing"
+      (click)="editProfile()">
+      Edit Profile
+    </button>
+  </div>
+
+
+  <div class="profile-card">
+
+    <!-- Profile Header -->
+    <div class="profile-top">
+
+      <div class="large-avatar">
+        {{ student.fullName.substring(0, 2).toUpperCase() }}
+      </div>
+
+      <div class="student-info">
+
+        <h2>{{ student.fullName }}</h2>
+
+        <p>{{ student.email }}</p>
+
+        <span class="status">
+          {{ student.status }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <h3 class="section-title">
+      Personal Information
+    </h3>
+
+
+    <!-- =========================
+         View Mode
+    ========================== -->
+
+    <div
+      class="info-grid"
+      *ngIf="!isEditing">
+
+      <div class="info-item">
+        <span class="label">Full Name</span>
+        <span class="value">
+          {{ student.fullName }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Student ID</span>
+        <span class="value">
+          {{ student.studentId }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Email</span>
+        <span class="value">
+          {{ student.email }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Age</span>
+        <span class="value">
+          {{ student.age }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">GPA</span>
+        <span class="value">
+          {{ student.gpa }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Role</span>
+        <span class="value">
+          {{ student.role }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Department</span>
+        <span class="value">
+          {{ student.department }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Level</span>
+        <span class="value">
+          {{ student.level }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Phone</span>
+        <span class="value">
+          {{ student.phone }}
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Edit Mode
+    ========================== -->
+
+    <div
+      class="edit-form"
+      *ngIf="isEditing">
+
+      <!-- Full Name -->
+      <div class="form-group">
+
+        <label>Full Name</label>
+
+        <input
+          type="text"
+          name="fullName"
+          [(ngModel)]="editStudent.fullName"
+          required
+          minlength="3">
+
+      </div>
+
+
+      <!-- Student ID -->
+      <div class="form-group">
+
+        <label>Student ID</label>
+
+        <input
+          type="text"
+          name="studentId"
+          [(ngModel)]="editStudent.studentId"
+          disabled>
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="editStudent.email"
+          #emailInput="ngModel"
+         disabled
+          email
+          placeholder="ahmed@example.com">
+
+        <small
+          class="error-message"
+          *ngIf="emailInput.invalid && emailInput.touched">
+
+          Please enter a valid email address.
+
+        </small>
+
+      </div>
+
+
+      <!-- Age -->
+      <div class="form-group">
+
+        <label>Age</label>
+
+        <input
+          type="number"
+          name="age"
+          [(ngModel)]="editStudent.age"
+          min="16"
+          max="100"
+          disabled>
+
+      </div>
+
+
+      <!-- Role -->
+      <div class="form-group">
+
+        <label>Role</label>
+
+        <input
+          type="text"
+          name="role"
+          value="Student"
+          disabled>
+
+      </div>
+
+
+      <!-- Department -->
+      <div class="form-group">
+
+        <label>Department</label>
+
+        <input
+          type="text"
+          name="department"
+          [(ngModel)]="editStudent.department"
+          required
+          disabled>
+
+      </div>
+
+
+      <!-- Level -->
+      <div class="form-group">
+
+        <label>Level</label>
+
+        <input
+          type="text"
+          name="level"
+          [(ngModel)]="editStudent.level"
+          required
+          disabled>
+
+      </div>
+
+
+      <!-- Phone -->
+      <div class="form-group">
+
+        <label>Phone</label>
+
+        <input
+          type="tel"
+          name="phone"
+          [(ngModel)]="editStudent.phone"
+          placeholder="+20 100 000 0000">
+
+      </div>
+
+
+      <!-- Buttons -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="cancelEdit()">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="button"
+          class="save-btn"
+          [disabled]="emailInput.invalid"
+          (click)="saveProfile()">
+
+          Save Changes
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,61 @@
+<nav class="navbar">
+  <div class="navbar-container">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">▱</div>
+
+      <div class="brand-text">
+        <span class="brand-name">Northfield University</span>
+        <span class="brand-subtitle">Course Enrollment</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+
+      <a
+        routerLink="/courses"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Courses
+      </a>
+
+      <a
+        routerLink="/my-courses"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        My Courses
+      </a>
+
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Profile
+      </a>
+
+    </div>
+
+    <!-- User -->
+    <div class="nav-user">
+
+      <div class="avatar">
+        {{ getInitials(user.firstName, user.lastName) }}
+      </div>
+
+      <span class="user-name">
+        {{ user.firstName }} {{ user.lastName }}
+      </span>
+
+      <button
+        class="sign-out"
+        type="button"
+        (click)="signOut()">
+        Sign out
+      </button>
+
+    </div>
+
+  </div>
+</nav>
