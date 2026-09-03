@@ -7,11 +7,9 @@ const adminMiddleware = require("../middleware/admin.middleware")
 router.use(authMiddleware)
 
 router.post("/", adminMiddleware, courseController.createCourse)
-router.get("/", courseController.getCourses)
 router.get("/getall", courseController.getCourses)
 router.get("/search", courseController.getCoursesByTitle)
 router.get("/getbyid/:id", courseController.getCourseById)
-router.get("/:id", courseController.getCourseById)
 router.delete("/:id", adminMiddleware, courseController.deleteCourse)
 router.put("/:id", adminMiddleware, courseController.updateCourse)
 
